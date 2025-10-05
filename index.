@@ -1,0 +1,52 @@
+Đại học Phenikaa
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu Trường Đại học Phenikaa</title>
+</head>
+<body>
+    <header>
+        <h1>Trường Đại học Phenikaa </h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Giới thiệu chung</h2>
+            <p>
+                Trường Đại học Phenikaa là một trong những trường đại học trẻ, năng động tại Việt Nam, 
+                hướng tới mô hình đại học đổi mới sáng tạo, gắn kết giữa đào tạo, nghiên cứu và doanh nghiệp.
+            </p>
+        </section>
+
+        <section>
+            <h2>Chương trình đào tạo nổi bật</h2>
+            <ul>
+                <li>Công nghệ thông tin</li>
+                <li>Kỹ thuật điều khiển và tự động hóa</li>
+                <li>Khoa học vật liệu tiên tiến</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Hình ảnh về Phenikaa</h2>
+            <img src="https://phenikaa-uni.edu.vn:3600/Upload/Images/2021/12/phenikaa1.jpg" alt="Khuôn viên Phenikaa" width="300">
+            <img src="https://phenikaa-uni.edu.vn:3600/Upload/Images/2021/12/phenikaa2.jpg" alt="Giảng đường Phenikaa" width="300">
+            <img src="https://phenikaa-uni.edu.vn:3600/Upload/Images/2021/12/phenikaa3.jpg" alt="Sinh viên Phenikaa" width="300">
+        </section>
+
+        <section>
+            <h2>Tham khảo thêm</h2>
+            <p>
+                Truy cập trang chính thức của trường tại 
+                <a href="https://phenikaa-uni.edu.vn" target="_blank">https://phenikaa-uni.edu.vn</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Đại học Phenikaa — Website học tập của sinh viên</p>
+    </footer>
+</body>
+</html>
