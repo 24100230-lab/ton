@@ -1,29 +1,37 @@
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  line-height: 1.6;
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
   background-color: #fff8f0;
   color: #333;
-  margin: 0;
-  padding: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  background: #333;
+  color: #fff;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.skip-link:focus {
+  top: 10px;
 }
 
 header {
   background-color: #ff6600;
   color: white;
   text-align: center;
-  padding: 25px;
+  padding: 20px;
 }
-
 nav ul {
+  display: inline-flex;
   list-style: none;
   padding: 0;
   margin: 10px 0 0;
-  display: flex;
-  justify-content: center;
-  background-color: #ff9933;
-}
-nav li {
-  margin: 0 20px;
+  width: 80%;
+  justify-content: space-around;
 }
 nav a {
   color: white;
@@ -34,28 +42,33 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* --- Nội dung chính --- */
 main {
   padding: 20px;
-  max-width: 900px;
-  margin: 30px auto;
+  text-align: center;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.food-item {
   background-color: #fff;
   border-radius: 10px;
+  padding: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-h2 {
-  color: #cc3300;
-  border-bottom: 2px solid #ff9933;
-  padding-bottom: 5px;
-}
-
-img {
+.food-item img {
   width: 100%;
-  max-width: 600px;
-  display: block;
-  margin: 15px auto;
-  border-radius: 10px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+.food-item img:hover {
+  transform: scale(1.05);
 }
 
 footer {
@@ -66,11 +79,20 @@ footer {
   margin-top: 20px;
 }
 
-@media (max-width: 600px) {
-  nav ul {
-    flex-direction: column;
+.food-grid-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+@media (max-width: 800px) {
+  .food-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  nav li {
-    margin: 10px 0;
+}
+@media (max-width: 500px) {
+  .food-grid {
+    grid-template-columns: 1fr;
   }
 }
