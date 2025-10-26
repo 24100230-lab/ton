@@ -7,7 +7,6 @@ body {
     padding: 20px;
     background-color: #f4f4f4;
 }
-
 #image-gallery {
     background-color: white;
     padding: 20px;
@@ -26,7 +25,6 @@ body {
     display: block;
     margin-bottom: 15px;
 }
-
 #description-text {
     font-size: 1.1em;
     color: #333;
@@ -37,7 +35,6 @@ body {
 #thumbnails {
     margin-top: 20px;
 }
-
 #thumbnails img {
     width: 120px;
     height: 80px;
@@ -49,7 +46,6 @@ body {
     opacity: 0.8;
     transition: border-color 0.2s, opacity 0.2s;
 }
-
 #thumbnails img:hover {
     border-color: #007bff;
     opacity: 1;
