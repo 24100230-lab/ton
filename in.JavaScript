@@ -1,21 +1,32 @@
-const mainImage = document.getElementById('main-image');
-const descriptionDiv = document.getElementById('description-text');
+let mainImage;
+let descriptionDiv;
+let originalSrc;
+let originalAlt;
 
-const originalSrc = mainImage.src;
-const originalAlt = mainImage.alt; 
+window.onload = function() {
+    mainImage = document.getElementById('main-image');
+    descriptionDiv = document.getElementById('description-text');
 
+    if (!mainImage || !descriptionDiv) {
+        console.error("LỖI DOM: Không thể tìm thấy 'main-image' hoặc 'description-text'. Kiểm tra lại ID trong index.html.");
+        return; 
+    }
+    originalSrc = mainImage.src;
+    originalAlt = mainImage.alt; 
+
+    console.log("Script Thư viện Ảnh Tương tác đã sẵn sàng.");
+};
 function updateImage(thumbnail) {
+    if (!mainImage || !descriptionDiv) return;
+
     mainImage.src = thumbnail.src;
     mainImage.alt = thumbnail.alt;
     descriptionDiv.innerHTML = thumbnail.alt;
-    
-    console.log(`Đã cập nhật ảnh lớn thành: ${thumbnail.alt}`);
 }
-
 function resetImage() {
+    if (!mainImage || !descriptionDiv) return;
+
     mainImage.src = originalSrc;
     mainImage.alt = originalAlt;
     descriptionDiv.innerHTML = originalAlt;
-
-    console.log("Đã hoàn tác về ảnh ban đầu.");
 }
