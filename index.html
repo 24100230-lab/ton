@@ -1,52 +1,23 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Các món ăn nổi tiếng Việt Nam</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <title>Thư viện Ảnh Tương tác</title>
+    </head>
 <body>
+    <div id="image-gallery">
+        <img id="main-image" src="images/placeholder.jpg" alt="Di chuột qua một hình ảnh bên dưới để hiển thị ở đây." width="500">
 
-  <!-- Liên kết chuyển nhanh đến nội dung chính -->
-  <a href="#main-content" class="skip-link">Chuyển đến Nội dung chính</a>
+        <p id="description-text">Di chuột qua một hình ảnh bên dưới để hiển thị ở đây.</p>
 
-  <header>
-    <h1>Ẩm Thực Việt Nam</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Trang chủ</a></li>
-        <li><a href="#">Miền Bắc</a></li>
-        <li><a href="#">Miền Trung</a></li>
-        <li><a href="#">Miền Nam</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main id="main-content">
-    <h2>Những món ăn nổi tiếng</h2>
-    <div class="food-grid">
-      <div class="food-item">
-        <img src="https://www.bonboncar.vn/blog/content/images/size/w1000/2025/08/image-245.png" alt="Phở Hà Nội">
-        <p><strong>Phở Hà Nội</strong> – Nước dùng thanh, bánh phở mềm và thịt bò tươi ngon.</p>
-      </div>
-
-      <div class="food-item">
-        <img src="https://file.hstatic.net/200000700229/article/bun-bo-hue-1_da318989e7c2493f9e2c3e010e722466.jpg" alt="Bún bò Huế">
-        <p><strong>Bún bò Huế</strong> – Món ăn cay nồng, đậm đà hương vị miền Trung.</p>
-      </div>
-
-      <div class="food-item">
-        <img src="https://i1-giadinh.vnecdn.net/2024/03/07/7Honthinthnhphm1-1709800144-8583-1709800424.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=yflkT1zyARjnO_PPyQYBoA" alt="Cơm tấm Sài Gòn">
-        <p><strong>Cơm tấm Sài Gòn</strong> – Món ăn quen thuộc với sườn nướng, bì, chả trứng.</p>
-      </div>
+        <div id="thumbnails">
+            <img src="images/pic1.jpg" alt="Cảnh hoàng hôn tuyệt đẹp" width="100" onmouseover="updateImage(this)" onmouseout="resetImage()">
+            <img src="images/pic2.jpg" alt="Một con mèo đang ngủ" width="100" onmouseover="updateImage(this)" onmouseout="resetImage()">
+            <img src="images/pic3.jpg" alt="Thành phố về đêm" width="100" onmouseover="updateImage(this)" onmouseout="resetImage()">
+        </div>
     </div>
-  </main>
 
-  <footer>
-    <p>© 2025 - Thiết kế bởi NGUYEN DUC TOAN</p>
-  </footer>
-
+    <script src="gallery.js"></script>
 </body>
 </html>
 
