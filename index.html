@@ -1,22 +1,38 @@
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Thư viện Ảnh Tương tác</title>
-    </head>
+    <title>Thư viện Ảnh Tương tác Hà Nội</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <div id="image-gallery">
-        <img id="main-image" src="images/placeholder.jpg" alt="Di chuột qua một hình ảnh bên dưới để hiển thị ở đây." width="500">
+        <h1>Thư viện Ảnh Tương tác</h1>
+        
+        <img id="main-image" 
+             src="https://sohanews.sohacdn.com/160588918557773824/2023/7/15/photo-15-1689407748083965320185.jpg" 
+             alt="Hồ Gươm sáng sớm">
 
-        <p id="description-text">Di chuột qua một hình ảnh bên dưới để hiển thị ở đây.</p>
+        <p id="description-text">Hồ Gươm sáng sớm</p>
 
         <div id="thumbnails">
-            <img src="https://sohanews.sohacdn.com/160588918557773824/2023/7/15/photo-15-1689407748083965320185.jpg" alt="Cảnh hoàng hôn tuyệt đẹp trên Tây Hồ" width="100" onmouseover="updateImage(this)" onmouseout="resetImage()">
-            <img src="https://kenh14cdn.com/2020/10/12/photo-1-16024666175791121577922.jpg" alt="Một con mèo đang ngủ hài hước" width="100" onmouseover="updateImage(this)" onmouseout="resetImage()">
-            <img src=""C:\Users\Lenovo LOQ\Downloads\hanoidem.png"" alt="Thành phố Hà Nội về đêm" width="100" onmouseover="updateImage(this)" onmouseout="resetImage()">
+            <img src="https://sohanews.sohacdn.com/160588918557773824/2023/7/15/photo-15-1689407748083965320185.jpg" 
+                 alt="Hồ Gươm sáng sớm" 
+                 onmouseover="updateImage(this)" 
+                 onmouseout="resetImage()">
+                 
+            <img src="https://kenh14cdn.com/2020/10/12/photo-1-16024666175791121577922.jpg" 
+                 alt="Phố cổ Hà Nội" 
+                 onmouseover="updateImage(this)" 
+                 onmouseout="resetImage()">
+                 
+            <img src="https://ohayo-onsen.com/wp-content/uploads/2024/01/du-lich-ha-noi-ve-dem-1.png" 
+                 alt="Cầu Long Biên về đêm" 
+                 onmouseover="updateImage(this)" 
+                 onmouseout="resetImage()">
         </div>
     </div>
 
     <script src="gallery.js"></script>
 </body>
 </html>
-
