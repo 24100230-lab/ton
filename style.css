@@ -48,7 +48,6 @@ h1, h2, h3, h4, h5, h6, p {
     padding: 15px;
 }
 
-/* --- 1. Header --- */
 .top-bar {
     background-color: #003366; 
     color: white;
@@ -79,7 +78,7 @@ h1, h2, h3, h4, h5, h6, p {
     color: #333;
     border-bottom: 3px solid transparent;
 }
-.main-nav a.active {
+.main-nav a.active { 
     border-bottom: 3px solid #003366;
     color: #003366;
 }
@@ -96,7 +95,6 @@ h1, h2, h3, h4, h5, h6, p {
     flex-direction: column;
     gap: 20px;
 }
-
 .hero-section {
     display: flex;
     gap: 20px;
@@ -142,7 +140,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
     gap: 15px;
 }
 .product-card {
@@ -185,7 +183,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
 .product-card .buy-button {
-    background-color: #f7941d;
+    background-color: #f7941d; 
     color: white;
     padding: 8px 12px;
     border: none;
@@ -194,6 +192,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin-top: 10px;
     text-transform: uppercase;
 }
+
 .bottom-categories {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -220,7 +219,6 @@ h1, h2, h3, h4, h5, h6, p {
     line-height: 1.5;
 }
 
-/* Ô tìm kiếm */
 .search-box form {
     display: flex;
     flex-direction: column;
@@ -249,7 +247,7 @@ h1, h2, h3, h4, h5, h6, p {
     padding: 0; 
 }
 .events-header {
-    background-color: #1a73e8;
+    background-color: #1a73e8; 
     color: white;
     font-weight: bold;
     padding: 10px;
@@ -283,5 +281,4 @@ h1, h2, h3, h4, h5, h6, p {
     text-align: center;
     padding: 20px 0;
     margin-top: 20px;
-}
 }
