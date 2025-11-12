@@ -1,30 +1,40 @@
-window.addEventListener('load', () => {
-    
-    console.log("Trang đã tải xong (Bước 8). Bắt đầu gán sự kiện.");
+import express from "express";
+import multer from "multer";
+import fs from "fs";
+import path from "path";
 
-    const images = document.querySelectorAll('#gallery img');
+const app = express();
+const PORT = 3000;
 
-    for (let i = 0; i < images.length; i++) {
-        let currentImage = images[i];
+// thư mục chứa ảnh
+const uploadDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
-        console.log(`Đang gán sự kiện cho ảnh ${i + 1}`);
+app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
 
-        currentImage.setAttribute('tabindex', '0');
-
-        currentImage.addEventListener('mouseover', (event) => {
-            console.log('Sự kiện: MOUSEOVER - Chuột đang ở trên ảnh');
-        });
-
-        currentImage.addEventListener('mouseleave', (event) => {
-            console.log('Sự kiện: MOUSELEAVE - Chuột đã rời khỏi ảnh');
-        });
-
-        currentImage.addEventListener('focus', (event) => {
-            console.log('Sự kiện: FOCUS - Ảnh đã được chọn bằng bàn phím');
-        });
-
-        currentImage.addEventListener('blur', (event) => {
-            console.log('Sự kiện: BLUR - Ảnh đã bị bỏ chọn bằng bàn phím');
-        });
-    }
+// cấu hình multer để lưu ảnh
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + "-" + file.originalname;
+    cb(null, uniqueName);
+  },
 });
+const upload = multer({ storage });
+
+// upload ảnh
+app.post("/upload", upload.array("images"), (req, res) => {
+  const urls = req.files.map((f) => "/uploads/" + f.filename);
+  res.json({ success: true, urls });
+});
+
+// trả danh sách ảnh
+app.get("/images", (req, res) => {
+  const files = fs.readdirSync(uploadDir).map((f) => "/uploads/" + f);
+  res.json(files);
+});
+
+app.listen(PORT, () =>
+  console.log(`✅ Server chạy tại: http://localhost:${PORT}`)
+);
