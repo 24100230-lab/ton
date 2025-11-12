@@ -1,23 +1,26 @@
-let mainImage;
-let descriptionDiv;
+window.addEventListener('load', () => {
+    console.log("Trang đã tải xong. Bắt đầu gán sự kiện.");
 
-window.onload = function() {
-    mainImage = document.getElementById('main-image');
-    descriptionDiv = document.getElementById('description-text');
+    const images = document.querySelectorAll('#gallery img');
 
-    if (!mainImage || !descriptionDiv) {
-        console.error("LỖI DOM: Không thể tìm thấy 'main-image' hoặc 'description-text'.");
+    for (let i = 0; i < images.length; i++) {
+        let currentImage = images[i];
+        console.log(`Đang gán sự kiện cho ảnh ${i + 1}`);
+        currentImage.setAttribute('tabindex', '0');
+        currentImage.addEventListener('focus', (event) => {
+            console.log('Sự kiện: FOCUS - Ảnh đã được chọn bằng bàn phím');
+        });
+
+        currentImage.addEventListener('blur', (event) => {
+            console.log('Sự kiện: BLUR - Ảnh đã bị bỏ chọn bằng bàn phím');
+        });
+
+        currentImage.addEventListener('mouseover', (event) => {
+            console.log('Sự kiện: MOUSEOVER - Chuột đang ở trên ảnh');
+        });
+
+        currentImage.addEventListener('mouseleave', (event) => {
+            console.log('Sự kiện: MOUSELEAVE - Chuột đã rời khỏi ảnh');
+        });
     }
-    
-    console.log("Script Thư viện Ảnh đã sẵn sàng.");
-};
-
-function changeImage(thumbnail) {
-    if (!mainImage || !descriptionDiv) return;
-
-    mainImage.src = thumbnail.src;
-    mainImage.alt = thumbnail.alt;
-    descriptionDiv.innerHTML = thumbnail.alt;
-    
-    console.log(`Đã thay đổi ảnh lớn thành: ${thumbnail.alt}`);
-}
+});
