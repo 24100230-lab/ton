@@ -1,188 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Thư Viện Ảnh Ny Tôi (Hoàng Linh)</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Responsive</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <header>
-      <div>
-        <h1>Thư Viện Ảnh Ny Tôi (Hoàng Linh)</h1>
-        <p>Up ảnh của người yêu — chỉ lưu trên trình duyệt của bạn (localStorage).</p>
-      </div>
-      <div class="small">An toàn & riêng tư • Không gửi server</div>
-    </header>
 
-    <div class="uploader">
-      <section class="gallery-card">
-        <div class="controls">
-          <label class="btn" for="fileInput">Chọn ảnh</label>
-          <input id="fileInput" class="input-file" type="file" accept="image/*" multiple />
-          <button id="clearAll" class="btn ghost">Xóa tất cả</button>
-          <div style="flex:1"></div>
-          <button id="downloadAll" class="btn ghost">Tải tất cả (mở tab)</button>
+    <!-- MENU -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Dịch vụ</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div id="dropzone" class="dropzone">Kéo thả ảnh vào đây hoặc nhấn "Chọn ảnh"</div>
-        <div id="thumbGrid" class="thumb-grid" aria-live="polite"></div>
-        <div id="emptyState" class="small">Chưa có ảnh nào — up một vài ảnh để bắt đầu.</div>
-      </section>
+    <!-- BANNER -->
+    <section class="hero">
+        <h1>Website Responsive Demo</h1>
+    </section>
 
-      <aside class="preview-card">
-        <div class="preview-big" id="previewBig"><div class="small">Chọn một ảnh để xem lớn</div></div>
-        <div class="small">Ảnh được lưu trong bộ nhớ trình duyệt (localStorage). Nếu bạn xóa cache hoặc dùng trình duyệt khác, ảnh sẽ mất.</div>
-      </aside>
+    <!-- GRID 3 CỘT -->
+    <div class="container">
+        <section class="grid">
+            <div class="card">Khối nội dung 1</div>
+            <div class="card">Khối nội dung 2</div>
+            <div class="card">Khối nội dung 3</div>
+        </section>
     </div>
 
-    <footer>
-      <p class="author">Tác giả: <strong>Toàn Nguyễn</strong></p>
-    </footer>
-  </div>
-
-  <script>
-    const STORAGE_KEY = 'private-photo-gallery-v1';
-    const fileInput = document.getElementById('fileInput');
-    const dropzone = document.getElementById('dropzone');
-    const thumbGrid = document.getElementById('thumbGrid');
-    const previewBig = document.getElementById('previewBig');
-    const emptyState = document.getElementById('emptyState');
-    const clearAll = document.getElementById('clearAll');
-    const downloadAll = document.getElementById('downloadAll');
-
-    let photos = loadFromStorage();
-    render();
-
-    fileInput.addEventListener('change', async (e)=>{
-      const files = Array.from(e.target.files);
-      await handleFiles(files);
-      fileInput.value = '';
-    });
-
-    ['dragenter','dragover'].forEach(ev=>{
-      dropzone.addEventListener(ev,(e)=>{
-        e.preventDefault();
-        dropzone.classList.add('dragover');
-      });
-    });
-    ['dragleave','drop'].forEach(ev=>{
-      dropzone.addEventListener(ev,(e)=>{
-        e.preventDefault();
-        dropzone.classList.remove('dragover');
-      });
-    });
-
-    dropzone.addEventListener('drop', async (e)=>{
-      const files = Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/'));
-      await handleFiles(files);
-    });
-
-    clearAll.addEventListener('click', ()=>{
-      if(!confirm('Xóa tất cả ảnh khỏi bộ nhớ trình duyệt?')) return;
-      photos = [];
-      saveToStorage();
-      render();
-    });
-
-    downloadAll.addEventListener('click', ()=>{
-      if(photos.length===0){alert('Chưa có ảnh để tải.');return}
-      photos.forEach(p=>{
-        const w = window.open(p.dataUrl,'_blank');
-        if(!w) alert('Popup bị chặn — cho phép popup để tải nhiều ảnh cùng lúc.');
-      });
-    });
-
-    async function handleFiles(files){
-      if(files.length===0) return;
-      const maxFileMB = 6;
-      for(const f of files){
-        if(f.size > maxFileMB*1024*1024){
-          alert(`Bỏ qua ${f.name}: lớn hơn ${maxFileMB}MB`);
-          continue;
-        }
-        const dataUrl = await fileToDataUrl(f);
-        photos.unshift({id:cryptoRandomId(),name:f.name,size:f.size,created:Date.now(),dataUrl});
-      }
-      saveToStorage();
-      render();
-    }
-
-    function fileToDataUrl(file){
-      return new Promise((res,rej)=>{
-        const r = new FileReader();
-        r.onload = ()=>res(r.result);
-        r.onerror = rej;
-        r.readAsDataURL(file);
-      });
-    }
-
-    function render(){
-      thumbGrid.innerHTML='';
-      emptyState.style.display = photos.length===0 ? 'block' : 'none';
-      photos.forEach((p,idx)=>{
-        const div = document.createElement('div');
-        div.className='thumb';
-        div.innerHTML = `
-          <img src="${p.dataUrl}" alt="${escapeHtml(p.name)}" />
-          <div class="meta">
-            <div title="${new Date(p.created).toLocaleString()}">${p.name}</div>
-            <div><button class="remove" data-idx="${idx}" title="Xóa">🗑</button></div>
-          </div>`;
-        thumbGrid.appendChild(div);
-      });
-
-      thumbGrid.querySelectorAll('.thumb img').forEach((img,i)=>{
-        img.addEventListener('click', ()=>showPreview(photos[i]));
-      });
-      thumbGrid.querySelectorAll('.remove').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          const i = Number(btn.getAttribute('data-idx'));
-          if(!confirm('Xóa ảnh này?')) return;
-          photos.splice(i,1);
-          saveToStorage();
-          render();
-        });
-      });
-    }
-
-    function showPreview(item){
-      previewBig.innerHTML = '';
-      const img = document.createElement('img');
-      img.src = item.dataUrl;
-      img.alt = item.name;
-      previewBig.appendChild(img);
-    }
-
-    function saveToStorage(){
-      try{
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(photos));
-      }catch(e){
-        console.error('Lưu thất bại', e);
-        alert('Không thể lưu: bộ nhớ trình duyệt đã đầy hoặc đang ở chế độ private.');
-      }
-    }
-    function loadFromStorage(){
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-      }catch(e){
-        console.error(e);
-        return [];
-      }
-    }
-    function cryptoRandomId(){
-      return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c/4).toString(16)
-      );
-    }
-    function escapeHtml(s){
-      return s.replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-    }
-    window.addEventListener('keydown',(e)=>{
-      if(e.key.toLowerCase()==='u'){fileInput.click()}
-    });
-  </script>
 </body>
 </html>
