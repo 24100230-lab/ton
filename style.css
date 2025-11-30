@@ -1,78 +1,47 @@
-body {
-    font-family: sans-serif;
-    margin: 20px;
-    line-height: 1.5;
+: gốc {
+  --bg :  # 0f172a ;
+  --thẻ :  # 0b1220 ;
+  --accent :  # 7c3aed ;
+  --tắt tiếng :  # 94a3b8 ;
+  --glass :  rgba ( 255 , 255 , 255 , 0.04 );
 }
-
-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
+* { kích thước hộp : hộp viền}
+thân hình {
+  lề : 0 ;
+  font-family : Inter , ui-sans-serif , system-ui , Segoe UI , Roboto , "Helvetica Neue" , Arial;
+  nền : gradient tuyến tính ( 180 độ , # 071129  0 % , # 071b2a  100 % );
+  màu sắc : # e6eef8 ;
+  chiều cao tối thiểu : 100 vh ;
+  hiển thị : flex;
+  căn chỉnh các mục : ở giữa;
+  justify-content : căn giữa;
+  đệm : 24 px ;
 }
-
-figure {
-    margin: 0;
-    padding: 10px;
-    border: 2px solid #ddd; 
-    background-color: #f9f9f9; 
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-@media (min-width: 772px) {
-    .gallery {
-        /* 5a. Sử dụng lưới hai cột */
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .gallery img {
-        border-radius: 50%;
-        aspect-ratio: 1 / 1;
-    }
-    .gallery figure:last-child {
-        grid-column: span 2;
-    }
-}
-@media (min-width: 992px) {
-    .gallery figure:nth-child(3n) {
-        grid-column: span 2;
-    }
-    .gallery figure:last-child:not(:nth-child(3n)) {
-        grid-column: auto; /* Hoặc span 1 */
-    }
-    .gallery img {
-        border-radius: 0;
-    }
-}
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-    
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #222; 
-        color: #fff;
-    }
-
-    .gallery figure {       
-        background-color: #333;
-        border-color: black;
-    }
-
-    .gallery figure p {
-        color: #ffd700;
-    }
-}
+. ứng dụng { chiều rộng : 100 % ; chiều rộng tối đa : 980 px }
+tiêu đề { hiển thị : flex; căn chỉnh các mục : ở giữa; căn chỉnh nội dung : khoảng cách giữa; lề dưới : 18 px }
+tiêu đề  h1 { cỡ chữ : 20 px ; lề : 0 }
+tiêu đề  p { lề : 0 ; màu : var ( --muted ); cỡ chữ : 13 px }
+. trình tải lên { hiển thị : lưới; cột mẫu lưới : 1 từ  360 px ; khoảng cách : 18 px }
+. gallery-card { nền : var ( --card ); đệm : 16 px ; bán kính đường viền : 12 px ; bóng hộp : 0  6 px  18 px  rgba ( 2 , 6 , 23 , 0,6 )}
+. điều khiển { hiển thị : flex; khoảng cách : 8 px ; căn chỉnh các mục : giữa; lề dưới : 12 px }
+. btn { nền : var ( --accent ); đường viền : không có; đệm : 8 px  12 px ; bán kính đường viền : 10 px ; màu : trắng; con trỏ : con trỏ; độ đậm phông chữ : 600 }
+. btn . ghost { nền : trong suốt; đường viền : 1 px solid rgba ( 255 , 255 , 255 , 0,06 )}
+. tệp đầu vào { hiển thị : không có}
+. dropzone { đường viền : 2 px nét đứt rgba ( 255 , 255 , 255 , 0,04 ); đệm : 18 px ; bán kính đường viền : 10 px ; nền : độ dốc tuyến tính ( 180 độ , rgba ( 255 , 255 , 255 , 0,02 ) , trong suốt); căn chỉnh văn bản : ở giữa; màu : var ( --muted )}
+. dropzone . dragover { border-color : rgba ( 124 , 58 , 237 , 0.9 ); box-shadow : 0  8 px  30 px  rgba ( 124 , 58 , 237 , 0.08 )}
+. thumb-grid { hiển thị : lưới; cột mẫu lưới : lặp lại (tự động điền , minmax ( 140 px , 1 fr )); khoảng cách : 12 px ; lề trên : 12 px }
+. thumb { vị trí : tương đối; nền : var ( --glass ); bán kính đường viền : 10 px ; tràn : ẩn; đệm : 8 px }
+. thumb  img { chiều rộng : 100 % ; chiều cao : 120 px ; đối tượng vừa vặn : bìa; bán kính đường viền : 8 px ; hiển thị : khối}
+. thumb . meta { hiển thị : flex; justify-content : khoảng cách giữa; align-items : giữa; margin-top : 8 px ; font-size : 12 px ; color : var ( --muted )}
+. thumb . remove { nền : trong suốt; đường viền : không có; màu : # ff6b6b ; con trỏ : con trỏ}
+. preview-card { nền : gradient tuyến tính ( 180 độ , rgba ( 255 , 255 , 255 , 0.02 ) , trong suốt); đệm : 16 px ; bán kính đường viền : 12 px ; chiều cao : 100 % }
+. preview-big { chiều rộng : 100 % ; chiều cao : 420 px ; bán kính đường viền : 12 px ; nền : # 07172b ; hiển thị : flex; căn chỉnh các mục : ở giữa; căn chỉnh nội dung : ở giữa; tràn : ẩn}
+. preview-big  img { chiều rộng tối đa : 100 % ; chiều cao tối đa : 100 % ; đối tượng phù hợp : chứa}
+. nhỏ { cỡ chữ : 13 px ; màu sắc : var ( --muted ); lề trên : 10 px }
+footer { lề trên : 14 px ; màu : var ( --muted ); cỡ chữ : 13 px ; căn chỉnh văn bản : giữa}
+chân trang . tác giả { lề trên : 6 px ; cỡ chữ : 15 px ; màu sắc : # c7d2fe }
+chân trang . tác giả  mạnh mẽ { màu sắc : # a78bfa }
+@media ( chiều rộng tối đa : 900 px ){
+  . trình tải lên { grid-template-columns : 1 fr }
+  . preview-big { chiều cao : 260 px }
+}}
