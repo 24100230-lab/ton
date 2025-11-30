@@ -1,58 +1,188 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư viện ảnh Responsive</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!doctypehtml >
+< html  lang =" vi " >
+< đầu >
+  < meta  charset =" utf-8 " />
+  < meta  name =" viewport " content =" width=device-width,initial-scale=1 " />
+  < title > Thư Viện Ảnh Ny Tôi (Hoàng Linh) </ title >
+  < liên kết  rel =" bảng định kiểu " href =" style.css " />
+</ đầu >
+< thân >
+  < div  class =" ứng dụng " >
+    < tiêu đề >
+      <div>​​
+        < h1 > Thư Viện Ảnh Ny Tôi (Hoàng Linh) </ h1 >
+        < p > Up ảnh của người yêu thích — lưu chỉ trên trình duyệt của bạn (localStorage). </p>​​
+      </div>​​
+      < div  class =" small " > An toàn & riêng tư • Không gửi máy chủ </ div >
+    </ tiêu đề >
 
-    <h1>Thư viện ảnh của tôi</h1>
+    < div  class =" người tải lên " >
+      < phần  lớp =" thẻ-thư-mục " >
+        < div  class =" điều khiển " >
+          < nhãn  class =" btn " for =" fileInput " > Chọn ảnh </ nhãn >
+          < input  id =" fileInput " class =" input-file " type =" file " accept =" image/* " multiple  />
+          < nút  id =" clearAll " class =" btn ghost " > Xóa tất cả </ nút >
+          < div  style =" flex:1 " > </ div >
+          < nút  id =" downloadAll " class =" btn ghost " > Tải tất cả (mở tab) </ nút >
+        </div>​​
 
-    <div class="gallery">
-        <figure>
-            <img src="https://placehold.co/300x300" alt="Mô tả hình ảnh trừu tượng 1">
-            <figcaption>
-                <p>Đây là đoạn văn mô tả cho hình ảnh số 1. Nội dung đã được thay thế theo yêu cầu.</p>
-            </figcaption>
-        </figure>
+        < div id =" dropzone " class = " dropzone " > Kéo thả ảnh vào đây hoặc nhấn "Chọn ảnh" < / div  >
+        < div  id =" thumbGrid " class =" thumb-grid " aria-live =" lịch sự " > </ div >
+        < div  id =" trốngState " class =" nhỏ " > Chưa có ảnh nào — up one few image to started. </ div >
+      </ phần >
 
-        <figure>
-            <img src="https://placehold.co/300x300" alt="Mô tả phong cảnh thiên nhiên 2">
-            <figcaption>
-                <p>Đây là đoạn văn mô tả cho hình ảnh số 2. Lorem ipsum dolor sit amet.</p>
-            </figcaption>
-        </figure>
+      < aside  class =" preview-card " >
+        < div  class =" xem trước-big " id =" xem trướcBig " > < div  class =" nhỏ " > Chọn một ảnh để xem lớn </ div > </ div >
+        < div  class =" small " > Ảnh được lưu trong trình duyệt bộ nhớ (localStorage). Nếu bạn xóa bộ nhớ đệm hoặc sử dụng trình duyệt khác, ảnh sẽ bị mất. </ div >
+      </ sang một bên >
+    </div>​​
 
-        <figure>
-            <img src="https://placehold.co/300x300" alt="Mô tả kiến trúc hiện đại 3">
-            <figcaption>
-                <p>Đây là đoạn văn mô tả cho hình ảnh số 3. Consectetur adipiscing elit.</p>
-            </figcaption>
-        </figure>
+    < chân trang >
+      < p  class =" tác giả " > Tác giả: < mạnh > Toàn Nguyễn </ mạnh > </ p >
+    </ chân trang >
+  </div>​​
 
-        <figure>
-            <img src="https://placehold.co/300x300" alt="Mô tả chân dung nghệ thuật 4">
-            <figcaption>
-                <p>Đây là đoạn văn mô tả cho hình ảnh số 4. Sed do eiusmod tempor incididunt.</p>
-            </figcaption>
-        </figure>
+  < kịch bản >
+    const  STORAGE_KEY  =  'thư viện ảnh riêng tư-v1' ;
+    const  fileInput  =  tài liệu . getElementById ( 'fileInput' ) ;
+    const  dropzone  =  document .getElementById ( 'dropzone ' ) ;
+    const  thumbGrid  =  document .getElementById ( 'thumbGrid ' ) ;
+    const  previewBig  =  document .getElementById ( 'previewBig ' ) ;
+    const  emptyState  =  document.getElementById ( ' emptyState ' ) ;
+    const  clearAll  =  document .getElementById ( ' clearAll' ) ;
+    const  downloadAll  =  document .getElementById ( ' downloadAll' ) ;
 
-        <figure>
-            <img src="https://placehold.co/300x300" alt="Mô tả động vật hoang dã 5">
-            <figcaption>
-                <p>Đây là đoạn văn mô tả cho hình ảnh số 5. Ut labore et dolore magna aliqua.</p>
-            </figcaption>
-        </figure>
+    hãy để  ảnh  =  loadFromStorage ( ) ;
+    kết xuất ( ) ;
 
-        <figure>
-            <img src="https://placehold.co/300x300" alt="Mô tả công nghệ tương lai 6">
-            <figcaption>
-                <p>Đây là đoạn văn mô tả cho hình ảnh số 6. Quis nostrud exercitation ullamco.</p>
-            </figcaption>
-        </figure>
-    </div>
+    fileInput .addEventListener ( 'thay đổi' , async ( e ) = > {  
+      const  files  =  Mảng . từ ( e . mục tiêu . tệp ) ;
+      chờ  handleFiles ( tệp ) ;
+      fileInput .giá trị  =  '' ;
+    } ) ;
 
-</body>
+    [ 'người kéo' , 'người kéo' ] . forEach ( ev => {
+      dropzone .addEventListener ( ev , ( e ) = > {
+        e . preventDefault ( ) ;
+        dropzone .classList .add ( ' dragover ' ) ;
+      } ) ;
+    } ) ;
+    [ 'kéo' , 'thả' ] . forEach ( ev => {
+      dropzone .addEventListener ( ev , ( e ) = > {
+        e . preventDefault ( ) ;
+        dropzone .classList .remove ( ' dragover ' ) ;
+      } ) ;
+    } ) ;
+
+    dropzone .addEventListener ( 'drop' , async ( e ) = > {  
+      const  files  =  Mảng . từ ( e . truyền dữ liệu . tệp ) . bộ lọc ( f => f . loại . bắt đầu với ( 'hình ảnh/' ) ) ;
+      chờ  handleFiles ( tệp ) ;
+    } ) ;
+
+    xóaTất cả .addEventListener ( 'nhấp' , ( ) = > { 
+      if ( ! confirm ( 'Xóa tất cả ảnh khỏi trình duyệt bộ nhớ?' ) )  return ;
+      ảnh  =  [ ] ;
+      lưu vào bộ nhớ ( ) ;
+      kết xuất ( ) ;
+    } ) ;
+
+    downloadAll .addEventListener ( 'click' , ( ) = > { 
+      if ( photos . length === 0 ) { notification ( 'Chưa có ảnh để tải.' ) ; trở lại }
+      ảnh . forEach ( p => {
+        const  w  =  cửa sổ . mở ( p . dataUrl , '_blank' ) ;
+        if ( ! w )  cảnh báo ( 'Popup bị chặn — cho phép bật lên để tải nhiều ảnh cùng lúc.' ) ;
+      } ) ;
+    } ) ;
+
+     hàm xử lý tệp không  đồng bộ ( tệp ) {
+      nếu ( tệp . độ dài === 0 )  trả về ;
+      hằng số  maxFileMB  =  6 ;
+      đối với ( const  f  của  các tập tin ) {
+        nếu ( f . kích thước  >  maxFileMB * 1024 * 1024 ) {
+          cảnh báo ( `Bỏ qua ${ f . name } : lớn hơn ${ maxFileMB } MB` ) ;
+          Tiếp tục ;
+        }
+        const  dataUrl  =  await  fileToDataUrl ( f ) ;
+        ảnh . unshift ( { id : cryptoRandomId ( ) , tên : f . tên , kích thước : f . kích thước , tạo : Ngày . bây giờ ( ) , dataUrl } ) ;
+      }
+      lưu vào bộ nhớ ( ) ;
+      kết xuất ( ) ;
+    }
+
+    hàm  fileToDataUrl ( tệp ) {
+      trả về  lời hứa mới  ( ( res , rej ) => {
+        const  r  =  new  FileReader ( ) ;
+        r . onload  =  ( ) => res ( r . result ) ;
+        r .onerror = rej ;​  
+        r . readAsDataURL ( tệp ) ;
+      } ) ;
+    }
+
+    hàm  render ( ) {
+      thumbGrid . innerHTML = '' ;
+      emptyState.style.display = photos.length === 0 ? ' block ' : ' none ' ;​​  
+      ảnh . forEach ( ( p , idx ) => {
+        const  div  =  document .createElement ( 'div ' ) ;
+        div .className = ' thumb' ;
+        div . innerHTML  =  `
+          <img src=" ${ p . dataUrl } " alt=" ${ escapeHtml ( p . name ) } " />
+          <div class="meta">
+            <div title=" ${ new  Date ( p . created ) . toLocaleString ( ) } "> ${ p . name } </div>
+            <div><button class="remove" data-idx=" ${ idx } " title="Xóa">🗑</button></div>
+          </div>` ;
+        thumbGrid .appendChild ( div ) ;​
+      } ) ;
+
+      thumbGrid .querySelectorAll ( '.thumb img ' ) .forEach ( ( img , i ) = > {
+        hình ảnh . addEventListener ( 'click' ,  ( ) => showPreview ( ảnh [ i ] ) ) ;
+      } ) ;
+      thumbGrid .querySelectorAll ( '.remove ' ) .forEach ( btn = > {
+        nút .addEventListener ( 'nhấp chuột' , ( ) = > { 
+          const  i  =  Số ( btn . getAttribute ( 'data-idx' ) ) ;
+          if ( ! confirm ( 'Xóa ảnh này?' ) )  return ;
+          ảnh . ghép nối ( i , 1 ) ;
+          lưu vào bộ nhớ ( ) ;
+          kết xuất ( ) ;
+        } ) ;
+      } ) ;
+    }
+
+    hàm  showPreview ( item ) {
+      previewBig . innerHTML  =  '' ;
+      const  img  =  document .createElement ( 'img ' ) ;
+      img . src  =  mục . dataUrl ;
+      img . alt  =  mục . tên ;
+      previewBig .appendChild ( img ) ;​
+    }
+
+    hàm  saveToStorage ( ) {
+      thử {
+        localStorage . setItem ( STORAGE_KEY ,  JSON . stringify ( ảnh ) ) ;
+      } bắt ( e ) {
+        bảng điều khiển . error ( 'Lưu thất bại' ,  e ) ;
+        cảnh báo ( 'Không thể lưu: trình duyệt bộ nhớ đã đầy hoặc đang ở chế độ riêng tư.' ) ;
+      }
+    }
+    hàm  loadFromStorage ( ) {
+      thử {
+        const  raw  =  localStorage.getItem ( STORAGE_KEY ) ;​​
+        trả về  dạng thô ? JSON.phân tích cú pháp ( thô ) : [ ] ;
+      } bắt ( e ) {
+        console.lỗi ( e ) ;​​
+        trở lại  [ ] ;
+      }
+    }
+    hàm  cryptoRandomId ( ) {
+      trả về  ( [ 1e7 ] + - 1e3 + - 4e3 + - 8e3 + - 1e11 ) . thay thế ( / [ 0 1 8 ] / g , c =>
+        ( c  ^  crypto . getRandomValues ​​( new  Uint8Array ( 1 ) ) [ 0 ]  &  15  >>  c / 4 ) . toString ( 16 )
+      ) ;
+    }
+    hàm  escapeHtml ( s ) {
+      trả về  s . thay thế ( / [ & < > \" ' ] / g , c => ( { "&" : "&" , "<" : "<" , ">" : ">" , "\"" : """ , "'" : "'" } [ c ] ) ) ;
+    }
+    cửa sổ .addEventListener ( 'keydown' , ( e ) = > {
+      nếu ( e . key . toLowerCase ( ) === 'u' ) { fileInput . click ( ) }
+    } ) ;
+  </ kịch bản >
+</ thân >
 </html>
